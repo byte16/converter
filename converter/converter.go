@@ -508,8 +508,6 @@ func (this *Converter) convertToPdf() (err error) {
 		args = append(args, this.Config.More...)
 	}
 
-	args = append(args, "--no-sandbox")
-
 	cmd := exec.Command(ebookConvert, args...)
 	if this.Debug {
 		fmt.Printf("before cmd run, args: %v\n", cmd.Args)
