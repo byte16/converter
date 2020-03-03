@@ -4,6 +4,7 @@
 package converter
 
 import (
+	"bytes"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -509,7 +510,16 @@ func (this *Converter) convertToPdf() (err error) {
 
 	cmd := exec.Command(ebookConvert, args...)
 	if this.Debug {
-		fmt.Printf("before cmd run, args: %v\n",cmd.Args)
+		fmt.Printf("before cmd run, args: %v\n", cmd.Args)
 	}
-	return cmd.Run()
+	var out bytes.Buffer
+	var stderr bytes.Buffer
+	cmd.Stdout = &out
+	cmd.Stderr = &stderr
+	err = cmd.Run()
+	if err != nil && this.Debug {
+		fmt.Printf("failed to run cmd when converting pdf, args: %v\n, err: %v\n", cmd.Args, err)
+	}
+	fmt.Printf("pdf convert result %s, err:%s\n", out.String(), stderr.String())
+	return
 }
