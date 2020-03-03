@@ -519,7 +519,7 @@ func (this *Converter) convertToPdf() (err error) {
 	err = cmd.Run()
 	if err != nil && this.Debug {
 		fmt.Printf("failed to run cmd when converting pdf, args: %v\n, err: %v\n", cmd.Args, err)
+		fmt.Printf("pdf convert result %s, err:%s\n", out.String(), stderr.String())
 	}
-	fmt.Printf("pdf convert result %s, err:%s\n", out.String(), stderr.String())
 	return
 }
