@@ -509,7 +509,7 @@ func (this *Converter) convertToPdf() (err error) {
 
 	cmd := exec.Command(ebookConvert, args...)
 	if this.Debug {
-		fmt.Println(cmd.Args)
+		fmt.Printf("before cmd run, args: %v\n",cmd.Args)
 	}
 	return cmd.Run()
 }
