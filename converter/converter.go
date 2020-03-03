@@ -468,7 +468,6 @@ func (this *Converter) convertToMobi() (err error) {
 //转成pdf
 func (this *Converter) convertToPdf() (err error) {
 	args := []string{
-		"--no-sandbox",
 		this.BasePath + "/content.epub",
 		this.BasePath + "/" + output + "/book.pdf",
 	}
@@ -508,6 +507,8 @@ func (this *Converter) convertToPdf() (err error) {
 	if len(this.Config.More) > 0 {
 		args = append(args, this.Config.More...)
 	}
+
+	args = append(args, "--no-sandbox")
 
 	cmd := exec.Command(ebookConvert, args...)
 	if this.Debug {
